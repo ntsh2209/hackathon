@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SEER: Financial Planning Chatbot </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #chatbox {
+      border: 1px solid #ccc;
+      height: 300px;
+      overflow-y: scroll;
+      padding: 10px;
+    }
+
+    #userInput {
+      width: 100%;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>SEER: Financial Planning Chatbot </h1>
+  <div id="chatbox"></div>
+  <input type="text" id="userInput" placeholder="Type your message...">
+  <script>
+    // Chatbot responses
+    const responses = {
+      greeting: "Hello! How can I assist you?",
+      farewell: "Goodbye! Have a great day!",
+      default: "I'm sorry, I didn't understand that.",
+    };
+
+    // Function to display bot message
+    function displayBotMessage(message) {
+      const chatbox = document.getElementById("chatbox");
+      const botMessage = document.createElement("div");
+      botMessage.innerHTML = `<strong>Bot:</strong> ${message}`;
+      chatbox.appendChild(botMessage);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    // Function to handle user input
+    function handleUserInput() {
+      const userInput = document.getElementById("userInput").value;
+      const chatbox = document.getElementById("chatbox");
+      const userMessage = document.createElement("div");
+      userMessage.innerHTML = `<strong>You:</strong> ${userInput}`;
+      chatbox.appendChild(userMessage);
+      chatbox.scrollTop = chatbox.scrollHeight;
+
+      // Clear the input field
+      document.getElementById("userInput").value = "";
+
+      // Process user input and generate bot response
+      let botResponse;
+      if (userInput.toLowerCase().includes("hello")) {
+        botResponse = responses.greeting;
+      } else if (userInput.toLowerCase().includes("bye")) {
+        botResponse = responses.farewell;
+      } else {
+        botResponse = responses.default;
+      }
+
+      // Display bot response
+      setTimeout(() => {
+        displayBotMessage(botResponse);
+      }, 500);
+    }
+
+    // Event listener for user input
+    document.getElementById("userInput").addEventListener("keyup", function (event) {
+      if (event.key === "Enter") {
+        handleUserInput();
+      }
+    });
+  </script>
+</body>
+</html>
